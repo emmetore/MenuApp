@@ -12,13 +12,8 @@ Your menu should have the options to create, view, and delete elements.
 //RANDOM WIFI UserName and PASSWORD GENERATOR
 /* they will see the prompt with the following options. If they choose create new username, they will be prompted 'create new username? 1. yes or 2. no'.
 
-If they choose yes, the code will return a random combination of a thing from a thingArray and a number from the usernameNumberArray. 
-
-If n, then they will return to the main menu
-
-When they choose create Password, they will be prompted to 'create new password? 1. yes or 2. no'.
-
-If they choose yes, the code will return a random combination of a thing from a symbolArray and a number from the usernameNumberArray. 
+If they choose yes, the code will return a random username from a combination of a thing from a usernameThingArray and a number from the usernameNumberArray. 
+and a random password, created from a combination of a thing from a passwordsymbolArray and a number from the usernameNumberArray. 
 
 
 /* 
@@ -26,8 +21,12 @@ If they choose yes, the code will return a random combination of a thing from a 
 1. Create User info
 2. View user info
 3. Delete User Info
-_____________=
- 'Your username is --.
+
+They'll have the option to view and delete their random user info.
+
+
+
+
 
 */
 //USERNAME GENERATOR
@@ -69,7 +68,7 @@ class User {
     generateUsername() {
         return randomUsername;
     }
-
+    //I want to be able to access the random Username  and Passowrd later
     generatePassword() {
         return randomPassword;
 
@@ -96,7 +95,7 @@ class Menu {
     start() {
         let selection = this.showMainMenu();
         while (selection != 0) {
-            switch (selection) {
+            switch (selection) { //we're showing our selection options and then calling a function depending on the user prompt response.
                 case '1':
                     this.createUserInfo();
                     break;
@@ -114,7 +113,9 @@ class Menu {
         alert('Goodbye!');
     }
 
-    showMainMenu() {
+
+
+    showMainMenu() { //this will display the main menu upon start
         return prompt(`
             0. exit
             1. create user info
@@ -124,31 +125,37 @@ class Menu {
         `);
     }
 
-    createUserInfo() {
+
+
+    createUserInfo() { //Here's where I want to ask the user if they'd like to create a random username and password.
         let createUserInfo = prompt(`
-        Generate random username & password? 
+        Generate random username & password?
         1. yes
         2. no
         `);
         if (createUserInfo === "1") {
             let newUsername = usernameHolderArray.push(randomUsername);
             let newPassword = passwordHolderArray.push(randomPassword);
-            alert(`Your username is ${usernameHolderArray} and your password is ${passwordHolderArray}.`);
-            return newUsername + newPassword;
+            alert(`Username and Password Created.`);
+            return newUsername + newPassword; //if they select yes, they'll be given a randomly generated user info that we created above the Classes, but they'll have to go elsewhere to view it.
 
         } else {
-            alert("Alright then. Keep your secrets.")
+            alert("Alright then. Keep your secrets.") //if they select "no", or "2", then they'll get a cheeky message and get sent back to the main menu
         }
 
     }
 
 
-    viewUserInfo() {
+
+
+    viewUserInfo() { //when they select view user info (2), they'll be shown their random user info
         alert(`Your username is ${usernameHolderArray} and your password is ${passwordHolderArray}.`);
     }
-    
 
-    deleteUserInfo() {
+
+
+
+    deleteUserInfo() { //They can delete both username and password simultaneously using splice.
         let deleteUserInfo = prompt(`
         Delete Username & Password?
         1. Yes
@@ -158,7 +165,7 @@ class Menu {
         if (deleteUserInfo === "1") {
             usernameHolderArray.splice(0, 1);
             passwordHolderArray.splice(0, 1);
-        }else{
+        } else {
             alert("Alright. I'll save your user info for later.")
         }
 
